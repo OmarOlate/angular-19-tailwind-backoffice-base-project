@@ -1,3 +1,5 @@
+# angular-19-tailwind-backoffice-base-project
+Backoffice bas project for start new project
 <p align="center">
     <img src="src/assets/preview/logo.png" width="150">
 </p>
@@ -79,13 +81,6 @@ See [Demo](https://at.lanno.dev) page.
 
 This project use [Hero Icons](https://heroicons.com/) , [Hero Patterns](https://heropatterns.com/) and [Popsys illustrations](https://popsy.co/)
 
-#### Sponsors ❤️
-
-Check out our awesome sponsors!
-
-[<img src="https://avatars.githubusercontent.com/u/19482926?v=4" width="60">](https://github.com/jhonnygarcia)
-[<img src="https://avatars.githubusercontent.com/u/44730111?v=4" width="60">](https://github.com/ramses-i)
-[<img src="https://avatars.githubusercontent.com/u/67803716?v=4" width="60">](https://github.com/walteribanez555)
 
 ### Repo Activity
 
