@@ -8,6 +8,7 @@
     <!-- List items -->
     <li *ngFor="let item of menu.items">
       <!-- Menu List -->
+      <!-- @angular-eslint/template/click-events-have-key-events -->
       <div
         (click)="toggleMenu(item)"
         class="text-muted-foreground hover:text-foreground group flex grow items-center gap-4">

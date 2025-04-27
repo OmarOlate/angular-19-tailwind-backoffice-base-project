@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
@@ -9,8 +9,4 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
   styleUrls: ['./forgot-password.component.css'],
   imports: [FormsModule, RouterLink, ButtonComponent],
 })
-export class ForgotPasswordComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class ForgotPasswordComponent {}

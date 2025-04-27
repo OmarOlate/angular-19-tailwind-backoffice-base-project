@@ -1,19 +1,19 @@
-import { Component, OnDestroy, OnInit, effect } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ChartOptions } from '../../../../../shared/models/chart-options';
 
 @Component({
-  selector: '[nft-chart-card]',
+  selector: 'nft-chart-card',
   templateUrl: './nft-chart-card.component.html',
   imports: [AngularSvgIconModule, NgApexchartsModule],
 })
-export class NftChartCardComponent implements OnInit, OnDestroy {
+export class NftChartCardComponent {
   public chartOptions: Partial<ChartOptions>;
 
   constructor(private themeService: ThemeService) {
-    let baseColor = '#FFFFFF';
+    const baseColor = '#FFFFFF';
     const data = [2100, 3200, 3200, 2400, 2400, 1800, 1800, 2400, 2400, 3200, 3200, 3000, 3000, 3250, 3250];
     const categories = [
       '10AM',
@@ -99,7 +99,7 @@ export class NftChartCardComponent implements OnInit, OnDestroy {
 
     effect(() => {
       /** change chart theme */
-      let primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary');
       this.chartOptions.tooltip = {
         theme: this.themeService.theme().mode,
       };
@@ -108,8 +108,4 @@ export class NftChartCardComponent implements OnInit, OnDestroy {
       this.chartOptions.xaxis!.crosshairs!.stroke!.color = primaryColor;
     });
   }
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 }

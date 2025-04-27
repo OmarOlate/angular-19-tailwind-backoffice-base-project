@@ -17,7 +17,7 @@ export class MenuService implements OnDestroy {
     /** Set dynamic menu */
     this._pagesMenu.set(Menu.pages);
 
-    let sub = this.router.events.subscribe((event) => {
+    const sub = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         /** Expand menu base on active route */
         this._pagesMenu().forEach((menu) => {
@@ -58,7 +58,7 @@ export class MenuService implements OnDestroy {
   public toggleSidebar() {
     this._showSidebar.set(!this._showSidebar());
   }
-
+  //@typescript-eslint/no-explicit-any
   public toggleMenu(menu: any) {
     this.showSideBar = true;
     menu.expanded = !menu.expanded;

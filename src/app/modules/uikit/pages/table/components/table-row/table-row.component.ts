@@ -4,13 +4,13 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { User } from '../../model/user.model';
 
 @Component({
-  selector: '[app-table-row]',
+  selector: 'app-table-row',
   imports: [FormsModule, AngularSvgIconModule],
   templateUrl: './table-row.component.html',
   styleUrl: './table-row.component.css',
 })
 export class TableRowComponent {
+  // @angular-eslint/component-selector
   @Input() user: User = <User>{};
 
-  constructor() {}
 }

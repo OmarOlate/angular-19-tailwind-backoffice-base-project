@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { toast } from 'ngx-sonner';
@@ -24,7 +24,7 @@ import { TableFilterService } from './services/table-filter.service';
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
   users = signal<User[]>([]);
 
   constructor(private http: HttpClient, private filterService: TableFilterService) {
@@ -37,7 +37,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  public toggleUsers(checked: boolean) {
+  public toggleUsers(checked: any) {
     this.users.update((users) => {
       return users.map((user) => {
         return { ...user, selected: checked };
@@ -94,6 +94,4 @@ export class TableComponent implements OnInit {
         return 0;
       });
   });
-
-  ngOnInit() {}
 }

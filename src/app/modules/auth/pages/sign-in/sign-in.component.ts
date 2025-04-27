@@ -9,7 +9,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css'],
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgIf, ButtonComponent, NgClass],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgIf, ButtonComponent, NgClass,],
 })
 export class SignInComponent implements OnInit {
   form!: FormGroup;
@@ -35,16 +35,5 @@ export class SignInComponent implements OnInit {
 
   togglePasswordTextType() {
     this.passwordTextType = !this.passwordTextType;
-  }
-
-  onSubmit() {
-    this.submitted = true;
-    const { email, password } = this.form.value;
-
-    if (this.form.invalid) {
-      return;
-    }
-
-    this._router.navigate(['/']);
   }
 }
