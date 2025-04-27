@@ -7,7 +7,7 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/chart-pie.svg',
+          icon: 'dashboard',
           label: 'Dashboard',
           route: '/dashboard',
           children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
@@ -46,17 +46,17 @@ export class Menu {
       separator: true,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/download.svg',
+          icon: 'download',
           label: 'Download',
           route: '/download',
         },
         {
-          icon: 'assets/icons/heroicons/outline/gift.svg',
+          icon: 'credit_card',
           label: 'Gift Card',
           route: '/gift',
         },
         {
-          icon: 'assets/icons/heroicons/outline/users.svg',
+          icon: 'groups',
           label: 'Users',
           route: '/users',
         },
@@ -67,17 +67,17 @@ export class Menu {
       separator: false,
       items: [
         {
-          icon: 'assets/icons/heroicons/outline/cog.svg',
+          icon: 'settings',
           label: 'Settings',
           route: '/settings',
         },
         {
-          icon: 'assets/icons/heroicons/outline/bell.svg',
+          icon: 'notifications',
           label: 'Notifications',
           route: '/gift',
         },
         {
-          icon: 'assets/icons/heroicons/outline/folder.svg',
+          icon: 'folder',
           label: 'Folders',
           route: '/folders',
           children: [
