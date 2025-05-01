@@ -10,7 +10,7 @@ export class Menu {
           icon: 'dashboard',
           label: 'Dashboard',
           route: '/dashboard',
-          children: [{ label: 'Nfts', route: '/dashboard/nfts' }],
+          children: [{ label: 'Admin', route: '/dashboard/admin' }],
         },
         {
           icon: 'assets/icons/heroicons/outline/lock-closed.svg',

@@ -5,17 +5,23 @@ import { NftDualCardComponent } from '../../components/nft/nft-dual-card/nft-dua
 import { NftHeaderComponent } from '../../components/nft/nft-header/nft-header.component';
 import { NftSingleCardComponent } from '../../components/nft/nft-single-card/nft-single-card.component';
 import { Nft } from '../../models/nft';
+import { CardComponent } from 'src/ui';
+import { SlotDirective } from "../../../../../ui/utils/slot.directive";
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-nft',
   templateUrl: './nft.component.html',
   imports: [
+    NgStyle,
     NftHeaderComponent,
     NftDualCardComponent,
     NftSingleCardComponent,
     NftChartCardComponent,
     NftAuctionsTableComponent,
-  ],
+    CardComponent,
+    SlotDirective
+],
 })
 export class NftComponent implements OnInit {
   nft: Array<Nft>;

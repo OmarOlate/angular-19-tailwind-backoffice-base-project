@@ -8,8 +8,6 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent {
-  readonly $icon = input.required({ alias: 'icon' });
-
   readonly $clicked = output({alias: 'clicked'})
 
 }

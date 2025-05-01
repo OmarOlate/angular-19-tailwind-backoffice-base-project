@@ -2,7 +2,7 @@ import { booleanAttribute, Component, computed, input, output } from '@angular/c
 import { IconComponent } from '../../atoms';
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonType } from './enums';
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-button',
@@ -14,15 +14,20 @@ export class ButtonComponent {
   readonly $text = input<string | null>(null, {alias: 'text'})
   readonly $type = input<ButtonType>(ButtonType.NONE, {
     alias: 'type'
-  })
+  });
 
   readonly $disabled = input(false, {
     alias: 'disabled',
     transform: booleanAttribute
-  })
+  });
+
+  readonly $isPrimary = input(false, {
+    alias: 'isPrimary',
+    transform: booleanAttribute});
   
   readonly $clicked = output({alias: 'clicked'})
 
   readonly $resolvedType = computed(()=>
   this.$disabled() ? 'disabled': this.$type())
+
 }

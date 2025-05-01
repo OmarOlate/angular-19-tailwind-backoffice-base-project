@@ -6,7 +6,6 @@ import { ResponsiveHelperComponent } from './shared/components/responsive-helper
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   imports: [RouterOutlet, ResponsiveHelperComponent, NgxSonnerToaster],
 })
 export class AppComponent {

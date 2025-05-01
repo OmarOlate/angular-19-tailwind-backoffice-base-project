@@ -5,7 +5,8 @@ export const ButtonType = {
     WARNING: 'warning',
     ERROR: 'error',
     NONE: 'none',
-    DISABLED: 'disabled'
+    DISABLED: 'disabled',
+    NAVBAR: 'navbar'
 } as const;
 
 export type ButtonType =(typeof ButtonType)[keyof typeof ButtonType]; 
