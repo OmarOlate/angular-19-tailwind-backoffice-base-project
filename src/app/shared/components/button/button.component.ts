@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, computed, input } from '@angular/core';
 import { cx } from '../../utils/ckassnames';
 
 type ButtonProps = {
@@ -16,7 +16,7 @@ type ButtonProps = {
   imports: [CommonModule],
   templateUrl: './button.component.html',
 })
-export class ButtonComponent implements OnInit {
+export class ButtonComponent {
   impact = input<ButtonProps['impact']>('none');
   size = input<ButtonProps['size']>('medium');
   shape = input<ButtonProps['shape']>('rounded');
@@ -32,7 +32,16 @@ export class ButtonComponent implements OnInit {
 
   @Output() buttonClick = new EventEmitter<void>();
 
-  public classes: string = '';
+  public classes = computed(() => {
+    return cx(
+      this.baseClasses,
+      this.impactClasses[this.tone()][this.impact()],
+      this.sizeClasses[this.size()],
+      this.shapeClasses[this.shape()],
+      this.shadowClasses[this.shadow()],
+      this.full() ? 'w-full' : '',
+    );
+  });
 
   baseClasses =
     'font-semibold focus-visible:outline-none flex items-center justify-center focus-visible:ring-2 focus-visible:ring-offset-2 active:translate-y-px disabled:pointer-events-none disabled:opacity-50';
@@ -88,19 +97,6 @@ export class ButtonComponent implements OnInit {
     medium: 'shadow-md',
     large: 'shadow-lg',
   };
-
-  constructor() {}
-
-  ngOnInit(): void {
-    this.classes = cx(
-      this.baseClasses,
-      this.impactClasses[this.tone()][this.impact()],
-      this.sizeClasses[this.size()],
-      this.shapeClasses[this.shape()],
-      this.shadowClasses[this.shadow()],
-      this.full() ? 'w-full' : '',
-    );
-  }
 
   onButtonClick() {
     this.buttonClick.emit();

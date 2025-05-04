@@ -5,20 +5,20 @@
         <span>{{ $subtitle()}}</span>
       </div>
     </div>
-    <div class="inline-block space-x-4">
-      <app-button isPrimary="true" (clicked)="clickedButton()" disabled="true">
+    <div class="inline-flex space-x-4">
+      <ng-template></ng-template>
+      <app-button  full impact="light" tone="primary" shape="rounded" size="medium" disabled="true">
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
         hola mundo
       </app-button>
-      <app-button isPrimary="true" iconButton="search" (clicked)="clickedButton()">
+      <app-button full impact="bold" tone="primary" shape="rounded" size="medium" routerLink="/auth/sign-up">
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
         Hola mundo
       </app-button>
-      <!-- <button
-        class="flex-none rounded-md bg-muted px-4 py-2.5 text-xs font-semibold text-muted-foreground hover:text-foreground">
-        Manage Bids
-      </button> -->
-      <button class="flex-none rounded-md bg-primary px-4 py-2.5 text-xs font-semibold text-primary-foreground">
-        Manage Bids
-      </button>
     </div>
 </div>
   

@@ -6,7 +6,7 @@
         @for (item of buttonNavbar ; track $index) {
           <button  
           class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800"
-          (click)="action(item.action)">
+          >
             <app-icon>
               {{item.icon}}
             </app-icon>
@@ -17,26 +17,6 @@
         }
         
       } 
-      <!-- <button class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800">
-        <svg-icon src="assets/icons/heroicons/outline/bell.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <span class="">Home</span>
-      </button>
-      <button class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800">
-        <svg-icon src="assets/icons/heroicons/outline/bookmark.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <span class="text-xs">Home</span>
-      </button>
-      <button class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800">
-        <svg-icon src="assets/icons/heroicons/outline/chart-pie.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <span class="text-xs">Home</span>
-      </button>
-      <button class="flex w-full flex-col items-center justify-center pt-3 pb-3 text-center hover:text-gray-800">
-        <svg-icon src="assets/icons/heroicons/outline/gift.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <span class="text-xs">Home</span>
-      </button>
-      <button class="flex w-full flex-col items-center justify-center pt-3 pb-3  text-center hover:text-gray-800">
-        <svg-icon src="assets/icons/heroicons/outline/information-circle.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
-        <span class="text-xs">Home</span>
-      </button> -->
     </div>
   </section>
   

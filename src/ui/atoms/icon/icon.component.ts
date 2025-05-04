@@ -9,5 +9,4 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class IconComponent {
   readonly $clicked = output({alias: 'clicked'})
-
 }

@@ -1,27 +1,4 @@
-@let type = $resolvedType();
-@let isPrimary = $isPrimary();
-@let isDisabled = $disabled();
-<!-- theme color -->
-
-<button
-class="flex-none items-center gap-2 rounded-md px-4 py-2.5 text-xs font-semibold cursor-pointer"
-[ngClass]="{
-    'bg-muted text-muted-foreground hover:text-foreground': isPrimary === false,
-    'bg-primary text-primary-foreground': isPrimary === true,
-    'bg-orange-700  hover:bg-orange-800 focus:ring-orange-300 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800': type === 'primary',
-    'bg-blue-700  hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800': type === 'info',
-    'bg-green-700  hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800': type === 'success',
-    'bg-red-700  hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900': type === 'error',
-    'bg-yellow-400  hover:bg-yellow-500 focus:ring-yellow-300 dark:focus:ring-yellow-900': type === 'warning',
-    'bg-white border border-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:bg-gray-200 dark:text-white dark:border-gray-100': isDisabled === true
-}"
-[disabled]="$disabled()"
-(click)="$clicked.emit()"> 
-@if ($iconButton()) {
-        <app-icon class="w-3.5 h-3.5 mt-0 pt-0" aria-hidden="true">
-        {{ $iconButton() }}
-        </app-icon>
-} 
+<button [disabled]="disabled()" [type]="type()" (click)="onButtonClick()" [ngClass]="classes">
     <ng-content></ng-content>
-
-</button>
+  </button>
+  
