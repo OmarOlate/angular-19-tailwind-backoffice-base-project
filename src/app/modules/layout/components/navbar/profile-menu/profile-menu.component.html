@@ -31,7 +31,7 @@
         routerLink="{{ item.link }}"
         :key="$index"
         class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold">
-        <svg-icon src="{{ item.icon }}" [svgClass]="'h-5 w-5 text-muted-foreground/50'"> </svg-icon>
+        <app-icon>{{item.icon}}</app-icon>
         {{ item.title }}
       </li>
       }
@@ -63,19 +63,15 @@
           (click)="toggleThemeMode()"
           [ngClass]="{ 'border-muted-foreground/30 bg-card': item == themeService.theme().mode }"
           class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground shadow-xs inline-flex h-8 cursor-pointer items-center justify-start space-x-2 whitespace-nowrap rounded-md border border-dashed px-3 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50">
-          <svg-icon
-            [src]="
-              item == 'light' ? 'assets/icons/heroicons/outline/sun.svg' : 'assets/icons/heroicons/outline/moon.svg'
-            "
-            [svgClass]="'h-5 w-5 text-muted-foreground/50'">
-          </svg-icon>
+          <app-icon >{{item == 'light' ? 'sunny' : 'dark_mode'}}</app-icon>
+          
           <p class="capitalize">{{ item }}</p>
         </div>
         }
       </div>
     </div>
     <div class="mx-4 my-2">
-      <span class="text-foreground text-xs font-semibold">Direction</span>
+      <span class="text-foreground text-xs font-semibold">Dirección</span>
       <div class="mt-2 grid grid-cols-2 gap-2">
         @for (item of themeDirection; track $index) {
         <div
@@ -83,14 +79,9 @@
           (click)="setDirection(item)"
           [ngClass]="{ 'border-muted-foreground/30 bg-card': item == themeService.theme().direction }"
           class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground shadow-xs inline-flex h-8 cursor-pointer items-center justify-start space-x-2 whitespace-nowrap rounded-md border border-dashed px-3 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50">
-          <svg-icon
-            [src]="
-              item == 'ltr'
-                ? 'assets/icons/tablericons/text-direction-ltr.svg'
-                : 'assets/icons/tablericons/text-direction-rtl.svg'
-            "
-            [svgClass]="'h-5 w-5 text-muted-foreground/50'">
-          </svg-icon>
+          <app-icon>
+            {{item == 'ltr' ? 'last_page': 'first_page' }}
+          </app-icon>
           <p class="uppercase">{{ item }}</p>
         </div>
         }

@@ -5,12 +5,13 @@ import { RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '../../../../../core/services/theme.service';
 import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
+import { IconComponent } from 'src/ui';
 
 @Component({
   selector: 'app-profile-menu',
   templateUrl: './profile-menu.component.html',
   styleUrls: ['./profile-menu.component.css'],
-  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule],
+  imports: [ClickOutsideDirective, NgClass, RouterLink, AngularSvgIconModule, IconComponent],
   animations: [
     trigger('openClose', [
       state(
@@ -39,17 +40,17 @@ export class ProfileMenuComponent implements OnInit {
   public profileMenu = [
     {
       title: 'Your Profile',
-      icon: './assets/icons/heroicons/outline/user-circle.svg',
+      icon: 'account_circle',
       link: '/profile',
     },
     {
       title: 'Settings',
-      icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
+      icon: 'settings',
       link: '/settings',
     },
     {
       title: 'Log out',
-      icon: './assets/icons/heroicons/outline/logout.svg',
+      icon: 'logout',
       link: '/auth',
     },
   ];
