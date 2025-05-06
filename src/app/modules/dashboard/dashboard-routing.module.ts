@@ -8,12 +8,20 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard], 
+    canActivateChild: [authGuard],
     children: [
-      { path: '', redirectTo: 'admin', pathMatch: 'full',    canActivate: [authGuard],
-    },
-      { path: 'admin', component: AdminComponent },
-      { path: '**', redirectTo: 'errors/404' },
+      { 
+        path: '', 
+        redirectTo: 'admin', 
+        pathMatch: 'full' },
+      { 
+        path: 'admin', 
+        component: AdminComponent
+      },
+      { 
+        path: '**', 
+        redirectTo: 'errors/404' },
     ],
   },
 ];
