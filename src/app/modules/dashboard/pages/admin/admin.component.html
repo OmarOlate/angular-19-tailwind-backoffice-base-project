@@ -1,0 +1,50 @@
+<div>
+    <app-header-dashboard 
+        title="Admin dashboard"
+        subtitle="Administración de backoffice"
+    >
+    <app-button  full impact="light" tone="primary" shape="rounded" size="medium" disabled="true" icon>
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
+        hola mundo
+      </app-button>
+      <app-button full impact="bold" tone="primary" shape="rounded" size="medium" routerLink="/auth/sign-up">
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
+        Hola mundo
+      </app-button>
+    </app-header-dashboard>
+
+    <div class="text-muted-foreground grid grid-cols-1 content-between gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        @for (item of indicators ; track $index) {
+          <a routerLink="{{item.action}}">
+            <app-card addBottomLine="true">
+                <div class=" grid grid-cols-2">
+                    <div class="w-13 h-13 content-center text-center rounded-full ring-2 ring-gray-300 dark:ring-gray-500">
+                        <span class="text-primary">{{ item.numbers }}</span>
+                    </div>
+                    <h2 class="w-full text-md mt-1 content-center font-semibold text-foreground ">{{ item.name }}</h2>
+                </div>
+            </app-card>
+          </a>
+        }
+    </div>
+
+    <div class="mt-3 text-muted-foreground grid grid-cols-1 content-between gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
+        <div>
+            <app-card> 
+              <app-area-chart></app-area-chart>
+            </app-card>
+        </div>
+        <div class="md:col-span-3">
+            <app-card>
+                <app-users-dashboard-table/>
+            </app-card>
+        </div>
+        
+        
+    </div>
+
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { ButtonComponent } from 'src/ui';
 
 @Component({
   selector: 'app-two-steps',
@@ -9,9 +9,9 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
   styleUrls: ['./two-steps.component.css'],
   imports: [FormsModule, RouterLink, ButtonComponent],
 })
-export class TwoStepsComponent implements OnInit {
+export class TwoStepsComponent {
   constructor() {}
   public inputs = Array(6);
 
-  ngOnInit(): void {}
+
 }

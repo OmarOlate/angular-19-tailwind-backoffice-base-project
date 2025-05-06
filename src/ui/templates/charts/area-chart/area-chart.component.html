@@ -1,0 +1,99 @@
+<div class="bg-background flex-col rounded-lg px-8 py-8 sm:flex-row">
+    <!-- Card Header -->
+    <div class="mb-2 flex items-center justify-between">
+      <div class="flex-col">
+        <div class="flex items-center space-x-1">
+          <span class="text-muted-foreground text-lg font-semibold">$</span>
+          <span class="text-foreground text-3xl font-semibold">
+            {{ data[data.length - 1]}}
+          </span>
+            <app-badge
+            [text]="getVariationPercentage() + '%'"
+            [type]="data[data.length - 1] - data[data.length - 2] >= 0 ? 'success' : 'error'"
+            ></app-badge>       
+        </div>
+        <span class="text-muted-foreground text-sm">Ventas mes - {{ categories[categories.length - 1] }}</span>
+      </div>
+      <div
+        class="rounded-xs bg-card text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer px-1 py-1 text-center text-xs">
+        <app-icon>
+          more_horiz
+        </app-icon>
+      </div>
+    </div>
+    <!-- end Card Header -->
+    <!-- <div class="mb-3 grid grid-cols-5 items-center justify-between gap-2 text-center">
+      <div class="bg-primary text-primary-foreground hover:bg-primary cursor-pointer rounded-md p-0.5 text-sm">1d</div>
+      <div class="hover:bg-primary hover:text-primary-foreground cursor-pointer rounded-md p-0.5 text-sm text-gray-400">
+        5d
+      </div>
+      <div class="hover:bg-primary hover:text-primary-foreground cursor-pointer rounded-md p-0.5 text-sm text-gray-400">
+        1m
+      </div>
+      <div class="hover:bg-primary hover:text-primary-foreground cursor-pointer rounded-md p-0.5 text-sm text-gray-400">
+        6m
+      </div>
+      <div class="hover:bg-primary hover:text-primary-foreground cursor-pointer rounded-md p-0.5 text-sm text-gray-400">
+        1y
+      </div>
+    </div> -->
+    <!-- Card Body -->
+    <apx-chart
+      [series]="$chartOptions.series!"
+      [chart]="$chartOptions.chart!"
+      [legend]="$chartOptions.legend!"
+      [dataLabels]="$chartOptions.dataLabels!"
+      [fill]="$chartOptions.fill!"
+      [stroke]="$chartOptions.stroke!"
+      [xaxis]="$chartOptions.xaxis!"
+      [yaxis]="$chartOptions.yaxis!"
+      [states]="$chartOptions.states!"
+      [tooltip]="$chartOptions.tooltip!"
+      [colors]="$chartOptions.colors!"
+      [grid]="$chartOptions.grid!"
+      [title]="$chartOptions.title!">
+    </apx-chart>
+    <!-- end Chart -->
+  
+    <!--Table-->
+    <table class="mt-2 w-full table-auto text-sm">
+      <!--begin::Table head-->
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <!--end::Table head-->
+      <!--begin::Table body-->
+      <tbody>
+        @for (i of [data.length - 1, data.length - 2, data.length - 3]; track i) {
+            <tr>
+                <td class="py-2">
+                  <a class="text-muted-foreground text-sm font-semibold">{{categories[i]}}</a>
+                </td>
+                <td class="py-2 text-right">
+                  <span class="text-foreground text-sm font-semibold">${{ data[i]}}</span>
+                </td>
+                <td class="py-2 text-right">
+                    @if (i > 0) {
+                        <span
+                          class="text-sm font-semibold"
+                          [class.text-green-500]="data[i] - data[i - 1] >= 0"
+                          [class.text-rose-600]="data[i] - data[i - 1] < 0"
+                        >
+                          {{ data[i] - data[i - 1] >= 0 ? '+' : '' }}{{ (data[i] - data[i - 1]) }}
+                        </span>
+                      } @else {
+                        <span class="text-sm font-semibold text-muted-foreground">—</span>
+                      }
+                </td>
+              </tr>
+        }
+      </tbody>
+      <!--end::Table body-->
+    </table>
+    <!--end Table-->
+  </div>
+  
