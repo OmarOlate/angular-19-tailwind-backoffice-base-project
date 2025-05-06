@@ -1,0 +1,138 @@
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, catchError, Observable, Subject, tap, throwError } from "rxjs";
+import { LoginInputDto, LoginOutputDto, UserDataDto } from "../dtos";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AuthService {
+    tokenKey = 'token';
+  private userDataKey = 'userData';
+
+  readonly #isLoading$ = new Subject<boolean>();
+  readonly #hasError$ = new Subject<boolean>();
+
+  token: string | null = null;
+  currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  currentUserData: BehaviorSubject<LoginOutputDto> = new BehaviorSubject<
+    Readonly<LoginOutputDto>
+  >({
+    token: { token: '' },
+    userData: {
+      code: '',
+      email: '',
+      fatherLastName: '',
+      id: 0,
+      motherLastName: '',
+      name: '',
+      rut: '',
+      status: '',
+    },
+  });
+
+  constructor(private http: HttpClient) {
+    this.loadSession();
+  }
+
+  private loadSession() {
+    const storedToken = localStorage.getItem(this.tokenKey);
+    const storedUserData = localStorage.getItem(this.userDataKey);
+
+    if (storedToken) {
+      this.token = storedToken;
+      this.currentUserLoginOn.next(true);
+
+      if (storedUserData) {
+        try {
+          const userData: UserDataDto = JSON.parse(storedUserData);
+          this.currentUserData.next({
+            token: { token: storedToken },
+            userData,
+          });
+        } catch (error) {
+          console.error('Error al parsear userData desde localStorage:', error);
+        }
+      }
+    }
+  }
+
+  private saveToken(token: string) {
+    localStorage.setItem(this.tokenKey, token);
+    this.token = token;
+  }
+
+  login(
+    loginInput: LoginInputDto
+  ): Observable<{ token: string; userData: UserDataDto }> {
+    return this.http
+      .post<{ token: string; userData: UserDataDto }>(
+        `${environment.baseUrl}/login/authenticate-user`,
+        {
+          email: loginInput.email,
+          password: loginInput.password,
+        }
+      )
+      .pipe(
+        tap(() => this.#hasError$.next(false)),
+        tap(() => this.#isLoading$.next(true)),
+        catchError((error: HttpErrorResponse) => {
+          let errorMessage = '';
+          if (error.error instanceof ErrorEvent) {
+            errorMessage = `Error ${error.error.message}`;
+          } else {
+            errorMessage = `Error code: ${error.status}, message: ${error.message}`;
+          }
+          this.#hasError$.next(true);
+          this.#isLoading$.next(false);
+          return throwError(() => errorMessage);
+        }),
+        tap((response: { token: string; userData: UserDataDto }) => {
+          this.saveToken(response.token);
+          console.log(response);
+          this.currentUserLoginOn.next(true);
+          this.currentUserData.next({
+            token: { token: response.token },
+            userData: response.userData,
+          });
+        }),
+        tap(() => this.#isLoading$.next(false))
+      );
+  }
+
+  logout() {
+    localStorage.removeItem(this.tokenKey);
+    this.token = null;
+    this.currentUserLoginOn.next(false);
+    this.currentUserData.next({
+      token: { token: '' },
+      userData: {
+        code: '',
+        email: '',
+        fatherLastName: '',
+        id: 0,
+        motherLastName: '',
+        name: '',
+        rut: '',
+        status: '',
+      },
+    });
+  }
+
+  readonly hasError$ = this.#hasError$.asObservable();
+  readonly isLoading$ = this.#isLoading$.asObservable();
+  isLogin() {
+    return this.token !== null;
+  }
+
+  get userData(): Observable<LoginOutputDto> {
+    return this.currentUserData.asObservable();
+  }
+
+  get userLoginOn(): Observable<boolean> {
+    return this.currentUserLoginOn.asObservable();
+  }
+}

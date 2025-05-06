@@ -1,5 +1,5 @@
 <!-- login form -->
-<form class="my-10 space-y-6" [formGroup]="form">
+<form class="my-10 space-y-6" [formGroup]="loginForm" (ngSubmit)="loginUser()">
   <div class="text-center">
     <h2 class="text-foreground mb-1 text-3xl font-semibold">Hola <span class="text-primary">!</span></h2>
     <p class="text-muted-foreground text-sm">Ingresa tus datos para iniciar sesión.</p>
@@ -73,8 +73,8 @@
     </app-button>
   </div>
 
-  @if(form.errors){
-    @if(form.errors['emailNotValid']){
+  @if(loginForm.errors){
+    @if(loginForm.errors['emailNotValid']){
       <app-alert>
         <div class="ms-3 text-sm font-medium">
           El email debe ser válido.
@@ -86,13 +86,13 @@
   <!-- Submit Button -->
   <div>
     <app-button 
-    [impact]="form.valid ? 'bold': 'none'" 
-    [tone]="form.valid ? 'primary': 'light'" 
+    [impact]="loginForm.valid ? 'bold': 'none'" 
+    [tone]="loginForm.valid ? 'primary': 'light'" 
     full 
     shape="rounded" 
     size="medium"
-    (buttonClick)="submitForm()" 
-    [disabled]="form.invalid"
+    (clicked)="loginUser()" 
+    [disabled]="loginForm.invalid"
     >Iniciar sesión</app-button>
   </div>
 

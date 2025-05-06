@@ -1,11 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '../../../../../core/services/theme.service';
 import { ClickOutsideDirective } from '../../../../../shared/directives/click-outside.directive';
 import { IconComponent } from 'src/ui';
+import { AuthService } from 'src/app/modules/auth/pages/data-access';
+import { LoginOutputDto } from 'src/app/modules/auth/pages/dtos';
 
 @Component({
   selector: 'app-profile-menu',
@@ -35,7 +37,9 @@ import { IconComponent } from 'src/ui';
     ]),
   ],
 })
-export class ProfileMenuComponent implements OnInit {
+export class ProfileMenuComponent implements OnInit{
+  userLoginOn: boolean = false;
+  userData: LoginOutputDto['userData'] | null = null;
   public isOpen = false;
   public profileMenu = [
     {
@@ -48,11 +52,11 @@ export class ProfileMenuComponent implements OnInit {
       icon: 'settings',
       link: '/settings',
     },
-    {
-      title: 'Log out',
-      icon: 'logout',
-      link: '/auth',
-    },
+    // {
+    //   title: 'Log out',
+    //   icon: 'logout',
+    //   link: '/auth',
+    // },
   ];
 
   public themeColors = [
@@ -89,9 +93,11 @@ export class ProfileMenuComponent implements OnInit {
   public themeMode = ['light', 'dark'];
   public themeDirection = ['ltr', 'rtl'];
 
-  constructor(public themeService: ThemeService) {}
-
-  ngOnInit(): void {}
+  constructor(
+    public themeService: ThemeService,
+    private $authService: AuthService,
+    private readonly _router: Router,
+    ) {}
 
   public toggleMenu(): void {
     this.isOpen = !this.isOpen;
@@ -114,5 +120,24 @@ export class ProfileMenuComponent implements OnInit {
     this.themeService.theme.update((theme) => {
       return { ...theme, direction: value };
     });
+  }
+
+  public logout(){
+    this.$authService.logout();
+    this._router.navigateByUrl('/auth/sign-in');
+
+  }
+
+  ngOnInit(): void {
+    const storedUser = localStorage.getItem('userData');
+    if (storedUser) {
+      try {
+        this.userData = JSON.parse(storedUser);
+        this.userLoginOn = true;
+      } catch (error) {
+        console.error('Error al parsear userData desde localStorage:', error);
+        this.userData = null;
+      }
+    }
   }
 }
