@@ -20,8 +20,8 @@
         (click)="toggleSidebar()"
         class="text-muted-foreground/50 hover:text-muted-foreground flex items-center justify-center rounded-md p-2 transition-all duration-200 focus:outline-hidden"
         [ngClass]="{ 'rotate-180': !menuService.showSideBar }">
-        <svg-icon src="assets/icons/heroicons/solid/chevron-double-left.svg"> </svg-icon>
-      </button>
+        <app-icon>keyboard_double_arrow_left</app-icon>
+        </button>
     </div>
 
     <!-- Menu Items -->
@@ -35,13 +35,12 @@
     <!-- Version -->
     <a
       target="_blank"
-      href="https://github.com/luciano-work/angular-tailwind"
+      href="https://github.com/OmarOlate/angular-19-tailwind-backoffice-base-project"
       class="-sm hover:bg-card group flex h-9 cursor-pointer items-center justify-start p-2">
-      <svg-icon
-        src="assets/icons/heroicons/outline/information-circle.svg"
-        [svgClass]="'h-5 w-5 text-muted-foreground/50'">
-      </svg-icon>
-
+      <app-icon class="h-5 w-5 text-muted-foreground/50">
+        info
+      </app-icon>
+      
       <div class="ml-3 truncate text-[10px] font-semibold tracking-wide focus:outline-hidden">
         <span class="bg-primary/10 text-primary px-2 font-semibold">v{{ appJson.version }}</span>
       </div>

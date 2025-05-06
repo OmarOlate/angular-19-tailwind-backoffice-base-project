@@ -14,9 +14,9 @@
   <span class="text-muted-foreground text-sm font-semibold">{{ auction.price | currency }}</span>
 </td>
 <td class="py-2 pl-2 text-right">
-  <!-- <div class="ml-4 flex items-center justify-start">
+  <div class="ml-4 flex items-center justify-start">
 		<img [src]="auction.avatar" class="mr-3 h-8 w-8 rounded-b-md" alt="" />
-	</div> -->
+	</div>
   <span class="text-muted-foreground text-sm font-semibold">{{ auction.last_bid }} ETH</span>
 </td>
 <td class="py-2 pl-2 text-right">
@@ -26,8 +26,7 @@
   <div class="flex justify-end">
     <button
       href="#"
-      class="bg-card text-muted-foreground hover:bg-muted hover:text-foreground flex h-7 w-7 items-center justify-center rounded-md">
-      <svg-icon src="assets/icons/heroicons/outline/arrow-sm-right.svg" [svgClass]="'h-5 w-5'"> </svg-icon>
+      class="bg-card hover:bg-muted hover:text-foreground flex items-center justify-center rounded-md">
     </button>
   </div>
 </td>

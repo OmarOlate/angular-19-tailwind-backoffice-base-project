@@ -5,6 +5,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SubMenuItem } from 'src/app/core/models/menu.model';
 import { MenuService } from '../../../services/menu.service';
 import { SidebarSubmenuComponent } from '../sidebar-submenu/sidebar-submenu.component';
+import { MatIconModule } from '@angular/material/icon';
+import { IconComponent } from 'src/ui';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -20,6 +22,8 @@ import { SidebarSubmenuComponent } from '../sidebar-submenu/sidebar-submenu.comp
     RouterLinkActive,
     NgIf,
     SidebarSubmenuComponent,
+    MatIconModule,
+    IconComponent
   ],
 })
 export class SidebarMenuComponent implements OnInit {
