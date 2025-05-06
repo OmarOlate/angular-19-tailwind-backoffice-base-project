@@ -9,9 +9,9 @@ import { ButtonComponent } from 'src/ui';
   styleUrls: ['./two-steps.component.css'],
   imports: [FormsModule, RouterLink, ButtonComponent],
 })
-export class TwoStepsComponent implements OnInit {
+export class TwoStepsComponent {
   constructor() {}
   public inputs = Array(6);
 
-  ngOnInit(): void {}
+
 }

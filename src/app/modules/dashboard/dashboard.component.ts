@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -6,8 +6,6 @@ import { RouterOutlet } from '@angular/router';
     templateUrl: './dashboard.component.html',
     imports: [RouterOutlet]
 })
-export class DashboardComponent implements OnInit {
-  constructor() {}
+export class DashboardComponent {
 
-  ngOnInit(): void {}
 }
