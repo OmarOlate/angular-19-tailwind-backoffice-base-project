@@ -43,7 +43,7 @@ export class NftChartCardComponent implements OnInit, OnDestroy {
       ],
       chart: {
         fontFamily: 'inherit',
-        type: 'area',
+        type: 'bar',
         height: 150,
         toolbar: {
           show: false,

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { PrincipalIndicatorsEnum } from './interface';
 import { RouterLink } from '@angular/router';
-import { ButtonComponent, CardComponent, HeaderDashboardComponent, IconComponent } from 'src/ui';
+import { AreaChartComponent, ButtonComponent, CardComponent, HeaderDashboardComponent, IconComponent } from 'src/ui';
 import { UsersDashboardTableComponent } from './ui';
+import { NftChartCardComponent } from '../../components/nft/nft-chart-card/nft-chart-card.component';
 
 @Component({
   selector: 'app-admin',
-  imports: [HeaderDashboardComponent, CardComponent, RouterLink, ButtonComponent, IconComponent, UsersDashboardTableComponent],
+  imports: [HeaderDashboardComponent, CardComponent, RouterLink, ButtonComponent, IconComponent, UsersDashboardTableComponent, AreaChartComponent],
   templateUrl: './admin.component.html',
 })
 export class AdminComponent {
