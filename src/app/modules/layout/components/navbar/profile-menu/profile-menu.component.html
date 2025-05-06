@@ -31,7 +31,7 @@
         routerLink="{{ item.link }}"
         :key="$index"
         class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold">
-        <app-icon>{{item.icon}}</app-icon>
+        <app-icon>{{ item.icon }}</app-icon>
         {{ item.title }}
       </li>
       }
@@ -63,7 +63,7 @@
           (click)="toggleThemeMode()"
           [ngClass]="{ 'border-muted-foreground/30 bg-card': item == themeService.theme().mode }"
           class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground shadow-xs inline-flex h-8 cursor-pointer items-center justify-start space-x-2 whitespace-nowrap rounded-md border border-dashed px-3 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50">
-          <app-icon >{{item == 'light' ? 'sunny' : 'dark_mode'}}</app-icon>
+          <app-icon>{{item == 'light' ? 'sunny' : 'dark_mode'}}</app-icon>
           
           <p class="capitalize">{{ item }}</p>
         </div>

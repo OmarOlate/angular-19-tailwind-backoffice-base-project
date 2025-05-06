@@ -10,7 +10,7 @@ import { IconComponent } from 'src/ui';
   selector: 'app-navbar-mobile-submenu',
   templateUrl: './navbar-mobile-submenu.component.html',
   styleUrls: ['./navbar-mobile-submenu.component.css'],
-  imports: [NgClass, NgFor, NgTemplateOutlet, RouterLinkActive,IconComponent, RouterLink, AngularSvgIconModule],
+  imports: [NgClass, NgFor, NgTemplateOutlet, RouterLinkActive,IconComponent, RouterLink, AngularSvgIconModule, IconComponent],
 })
 export class NavbarMobileSubmenuComponent implements OnInit {
   @Input() public submenu = <SubMenuItem>{};
