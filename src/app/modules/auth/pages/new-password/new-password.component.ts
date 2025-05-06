@@ -1,17 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { ButtonComponent, IconComponent } from 'src/ui';
 
 @Component({
   selector: 'app-new-password',
   templateUrl: './new-password.component.html',
   styleUrls: ['./new-password.component.css'],
-  imports: [FormsModule, RouterLink, AngularSvgIconModule, ButtonComponent],
+  imports: [FormsModule, RouterLink, AngularSvgIconModule, ButtonComponent, IconComponent],
 })
-export class NewPasswordComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class NewPasswordComponent{
+  hide = true;
 }

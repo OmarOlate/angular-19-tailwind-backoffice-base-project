@@ -5,6 +5,7 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { SubMenuItem } from 'src/app/core/models/menu.model';
 import { MenuService } from 'src/app/modules/layout/services/menu.service';
 import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mobile-submenu.component';
+import { IconComponent } from 'src/ui';
 
 @Component({
   selector: 'app-navbar-mobile-menu',
@@ -19,6 +20,7 @@ import { NavbarMobileSubmenuComponent } from '../navbar-mobile-submenu/navbar-mo
     RouterLinkActive,
     NgIf,
     NavbarMobileSubmenuComponent,
+    IconComponent
   ],
 })
 export class NavbarMobileMenuComponent implements OnInit {
