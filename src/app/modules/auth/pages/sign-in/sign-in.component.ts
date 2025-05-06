@@ -3,14 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { IconComponent } from 'src/ui';
+import { AlertComponent, ButtonComponent, IconComponent } from 'src/ui';
+import { emailFormatValidator } from '../custom-validators';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css'],
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, NgIf, ButtonComponent, NgClass, IconComponent],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, ButtonComponent, NgClass, IconComponent, AlertComponent],
 })
 export class SignInComponent implements OnInit {
   hide = true;
@@ -20,14 +19,14 @@ export class SignInComponent implements OnInit {
 
   constructor(private readonly _formBuilder: FormBuilder, private readonly _router: Router) {}
 
-  onClick() {
-    console.log('Button clicked');
-  }
-
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', Validators.required],
+    }, {
+      Validators:[
+        emailFormatValidator('email')
+      ]
     });
   }
 
@@ -39,13 +38,16 @@ export class SignInComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  onSubmit() {
+  submitForm() {
     this.submitted = true;
     const { email, password } = this.form.value;
 
     if (this.form.invalid) {
+      this.form.markAllAsTouched();
       return;
     }
+    console.log('Formulario válido:', this.form.value);
+
 
     this._router.navigate(['/']);
   }

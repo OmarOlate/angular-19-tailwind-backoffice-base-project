@@ -1,16 +1,29 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { NftAuctionsTableItemComponent } from 'src/app/modules/dashboard/components/nft/nft-auctions-table-item/nft-auctions-table-item.component';
 import { Nft } from 'src/app/modules/dashboard/models/nft';
+import { ButtonComponent, ExpressTableComponent, HeaderDashboardComponent,  } from 'src/ui';
+import { SlotDirective } from 'src/ui/utils';
+export type HeaderActionsType = {
+  item: string;
+}
 
 @Component({
-  selector: 'app-table',
-  imports: [NgFor, NftAuctionsTableItemComponent],
-  templateUrl: './table.component.html',
+  selector: 'app-users-dashboard-table',
+  imports: [ExpressTableComponent, SlotDirective,HeaderDashboardComponent, ButtonComponent, ButtonComponent],
+  templateUrl: './users-dashboard-table.component.html',
 })
-export class TableComponent {
+export class UsersDashboardTableComponent {
 
   public activeAuction: Nft[] = [];
+
+  readonly $headerActions: HeaderActionsType[] = [
+    {item:'Item'},
+    {item:'Open Price'},
+    {item:'Price $'},
+    {item:'Recent Offer'},
+    {item:'Time Left'},
+    {item:'Acción'},
+  ];
+
 
   constructor() {
     this.activeAuction = [
@@ -75,6 +88,6 @@ export class TableComponent {
         instant_price: 0.35,
       },
     ];
-  }
 
+  }
 }

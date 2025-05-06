@@ -1,4 +1,9 @@
-<button [disabled]="disabled()" [type]="type()" (click)="onButtonClick()" [ngClass]="classes">
+<button [disabled]="disabled()" [type]="type()" (click)="onButtonClick()" [ngClass]="classes()">
+  @if($icon()){
+    <app-icon class="mr-2 h-6 w-7">
+      {{ $icon() }}
+    </app-icon>
+  }
     <ng-content></ng-content>
   </button>
   

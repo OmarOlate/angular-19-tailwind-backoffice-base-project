@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { PrincipalIndicatorsEnum } from './interface';
 import { RouterLink } from '@angular/router';
-import { CardComponent, HeaderDashboardComponent, TableComponent } from 'src/ui';
+import { ButtonComponent, CardComponent, HeaderDashboardComponent, IconComponent } from 'src/ui';
+import { UsersDashboardTableComponent } from './ui';
 
 @Component({
   selector: 'app-admin',
-  imports: [HeaderDashboardComponent, CardComponent, RouterLink, TableComponent],
+  imports: [HeaderDashboardComponent, CardComponent, RouterLink, ButtonComponent, IconComponent, UsersDashboardTableComponent],
   templateUrl: './admin.component.html',
 })
 export class AdminComponent {

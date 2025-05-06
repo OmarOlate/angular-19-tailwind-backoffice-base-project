@@ -2,7 +2,20 @@
     <app-header-dashboard 
         title="Admin dashboard"
         subtitle="Administración de backoffice"
-    ></app-header-dashboard>
+    >
+    <app-button  full impact="light" tone="primary" shape="rounded" size="medium" disabled="true" icon>
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
+        hola mundo
+      </app-button>
+      <app-button full impact="bold" tone="primary" shape="rounded" size="medium" routerLink="/auth/sign-up">
+        <app-icon class="h-6 w-7">
+          double_arrow
+        </app-icon>
+        Hola mundo
+      </app-button>
+    </app-header-dashboard>
 
     <div class="text-muted-foreground grid grid-cols-1 content-between gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
         @for (item of indicators ; track $index) {
@@ -25,8 +38,7 @@
         </div>
         <div class="md:col-span-3">
             <app-card>
-                <app-table>  
-                </app-table>
+                <app-users-dashboard-table/>
             </app-card>
         </div>
         

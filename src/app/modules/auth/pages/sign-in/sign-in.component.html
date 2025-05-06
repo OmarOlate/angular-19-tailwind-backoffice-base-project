@@ -1,5 +1,5 @@
 <!-- login form -->
-<form class="my-10 space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="my-10 space-y-6" [formGroup]="form">
   <div class="text-center">
     <h2 class="text-foreground mb-1 text-3xl font-semibold">Hola <span class="text-primary">!</span></h2>
     <p class="text-muted-foreground text-sm">Ingresa tus datos para iniciar sesión.</p>
@@ -33,10 +33,7 @@
           Email
         </label>
       </div>
-      <div *ngIf="submitted && f['email'].errors" class="is__invalid-error">
-        <div *ngIf="f['email'].errors['required']">Debes ingresar email</div>
-        <div *ngIf="f['email'].errors['email']">Email inválido</div>
-      </div>
+      
     </div>
 
     <div class="form__group">
@@ -61,9 +58,7 @@
           </app-icon>
         </span>
       </div>
-      <div *ngIf="submitted && f['password'].errors" class="is__invalid-error">
-        <div *ngIf="f['password'].errors['required']">Debes ingresar contraseña</div>
-      </div>
+      
     </div>
   </div>
 
@@ -78,9 +73,27 @@
     </app-button>
   </div>
 
+  @if(form.errors){
+    @if(form.errors['emailNotValid']){
+      <app-alert>
+        <div class="ms-3 text-sm font-medium">
+          El email debe ser válido.
+        </div>
+      </app-alert>
+    }
+  }
+
   <!-- Submit Button -->
   <div>
-    <app-button full impact="bold" tone="primary" shape="rounded" size="medium">Iniciar sesión</app-button>
+    <app-button 
+    [impact]="form.valid ? 'bold': 'none'" 
+    [tone]="form.valid ? 'primary': 'light'" 
+    full 
+    shape="rounded" 
+    size="medium"
+    (buttonClick)="submitForm()" 
+    [disabled]="form.invalid"
+    >Iniciar sesión</app-button>
   </div>
 
   <!-- Sign-up -->

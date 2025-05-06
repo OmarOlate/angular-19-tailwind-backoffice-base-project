@@ -1,17 +1,15 @@
-import { Component, effect, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { AlertComponent, IconComponent } from 'src/ui';
+import { AlertComponent, ButtonComponent, IconComponent } from 'src/ui';
 import { emailFormatValidator, getPasswordStrength, passwordMatchValidator } from '../custom-validators';
 import { NgClass } from '@angular/common';
-import { SignUpTermsAndConditionsComponent } from 'src/ui/templates/terms-and-conditions';
+import { SignUpTermsAndConditionsComponent } from 'src/ui/organisms/terms-and-conditions/sign-up';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css'],
   imports: [FormsModule, NgClass, ReactiveFormsModule, RouterLink, AngularSvgIconModule, ButtonComponent, IconComponent, AlertComponent, SignUpTermsAndConditionsComponent],
 })
 export class SignUpComponent{
