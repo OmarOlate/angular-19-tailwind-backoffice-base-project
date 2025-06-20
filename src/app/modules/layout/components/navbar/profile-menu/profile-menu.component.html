@@ -5,7 +5,7 @@
     <img
       clickOutside
       (clickOutside)="isOpen = false"
-      class="size-9 shrink-0 rounded-md"
+      class="size-9 shrink-0 rounded-4xl"
       src="https://avatars.githubusercontent.com/u/12519008?v=4"
       alt="" />
   </button>
@@ -15,11 +15,11 @@
     class="bg-background shadow-custom border-muted absolute z-20 mt-2 w-60 origin-top-right transform rounded-md border border-dashed py-4 ring-1 ring-transparent ring-opacity-5 transition focus:outline-hidden ltr:right-0 rtl:left-0">
     <div class="flext-row flex items-center px-4 pb-4">
       <div class="w-10 shrink-0">
-        <img class="rounded-md" src="https://avatars.githubusercontent.com/u/12519008?v=4" alt="" />
+        <img class="rounded-4xl" src="https://avatars.githubusercontent.com/u/12519008?v=4" alt="" />
       </div>
       <div class="text-foreground overflow-hidden px-2 text-sm font-semibold">
-        Luciano Oliveira
-        <p class="text-muted-foreground truncate text-ellipsis text-xs font-semibold">me&#64;lanno.dev</p>
+        {{ userData?.name +' '+ userData?.fatherLastName + ' '+ userData?.motherLastName  }}
+        <p class="text-muted-foreground truncate text-ellipsis text-xs font-semibold">{{userData?.email}}</p>
       </div>
     </div>
 
@@ -31,10 +31,16 @@
         routerLink="{{ item.link }}"
         :key="$index"
         class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold">
-        <app-icon>{{item.icon}}</app-icon>
+        <app-icon>{{ item.icon }}</app-icon>
         {{ item.title }}
       </li>
       }
+      <li
+      (click)="logout()"
+        class="text-muted-foreground hover:bg-card hover:text-primary inline-flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-xs font-semibold">
+        <app-icon>logout</app-icon>
+        Cerrar sesión
+      </li>
     </ul>
     <hr class="border-border border-dashed" />
     <div class="mx-4 my-2">
@@ -63,7 +69,7 @@
           (click)="toggleThemeMode()"
           [ngClass]="{ 'border-muted-foreground/30 bg-card': item == themeService.theme().mode }"
           class="focus-visible:ring-ring border-border bg-background text-muted-foreground hover:bg-card hover:text-foreground shadow-xs inline-flex h-8 cursor-pointer items-center justify-start space-x-2 whitespace-nowrap rounded-md border border-dashed px-3 text-xs font-medium transition-colors focus-visible:outline-hidden focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50">
-          <app-icon >{{item == 'light' ? 'sunny' : 'dark_mode'}}</app-icon>
+          <app-icon>{{item == 'light' ? 'sunny' : 'dark_mode'}}</app-icon>
           
           <p class="capitalize">{{ item }}</p>
         </div>
