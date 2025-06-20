@@ -75,7 +75,7 @@
 
   @if(loginForm.errors){
     @if(loginForm.errors['emailNotValid']){
-      <app-alert>
+      <app-alert type="danger">
         <div class="ms-3 text-sm font-medium">
           El email debe ser válido.
         </div>
@@ -88,11 +88,13 @@
     <app-button 
     [impact]="loginForm.valid ? 'bold': 'none'" 
     [tone]="loginForm.valid ? 'primary': 'light'" 
+    [impact]="$isLoading()? 'none': 'bold'"
     full 
     shape="rounded" 
     size="medium"
     (clicked)="loginUser()" 
     [disabled]="loginForm.invalid"
+    [isLoading]="$isLoading()"
     >Iniciar sesión</app-button>
   </div>
 
