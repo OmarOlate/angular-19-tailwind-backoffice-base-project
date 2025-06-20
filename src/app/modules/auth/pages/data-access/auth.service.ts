@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, Observable, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, finalize, map, Observable, Subject, tap, throwError } from "rxjs";
 import { LoginInputDto, LoginOutputDto, UserDataDto } from "../dtos";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpStatusCode } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +12,14 @@ export class AuthService {
     tokenKey = 'token';
   private userDataKey = 'userData';
 
-  readonly #isLoading$ = new Subject<boolean>();
-  readonly #hasError$ = new Subject<boolean>();
+  readonly #isLoading$ = new BehaviorSubject(false);
+  readonly #error$ = new Subject<HttpStatusCode | undefined>
+
+  readonly $isLoading = toSignal(this.#isLoading$, {initialValue: false});
+  readonly $error = toSignal(this.#error$);
+  readonly $hasError = toSignal(
+    this.#error$.pipe(map((code) => code !== undefined)),
+  );
 
   token: string | null = null;
   currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
@@ -67,7 +74,9 @@ export class AuthService {
 
   login(
     loginInput: LoginInputDto
-  ): Observable<{ token: string; userData: UserDataDto }> {
+  ): Observable<{ token: string; userData: UserDataDto }> {   
+    this.#isLoading$.next(true); 
+    
     return this.http
       .post<{ token: string; userData: UserDataDto }>(
         `${environment.baseUrl}/login/authenticate-user`,
@@ -77,29 +86,31 @@ export class AuthService {
         }
       )
       .pipe(
-        tap(() => this.#hasError$.next(false)),
-        tap(() => this.#isLoading$.next(true)),
+        tap(()=> this.#isLoading$.next(true)),
+        tap(() => this.#error$.next(undefined)),
         catchError((error: HttpErrorResponse) => {
+
           let errorMessage = '';
           if (error.error instanceof ErrorEvent) {
             errorMessage = `Error ${error.error.message}`;
           } else {
             errorMessage = `Error code: ${error.status}, message: ${error.message}`;
           }
-          this.#hasError$.next(true);
+          this.#error$.next(error.status);
           this.#isLoading$.next(false);
           return throwError(() => errorMessage);
         }),
         tap((response: { token: string; userData: UserDataDto }) => {
           this.saveToken(response.token);
-          console.log(response);
           this.currentUserLoginOn.next(true);
           this.currentUserData.next({
             token: { token: response.token },
             userData: response.userData,
           });
         }),
-        tap(() => this.#isLoading$.next(false))
+        finalize(() => {
+          this.#isLoading$.next(false);
+        })
       );
   }
 
@@ -122,8 +133,7 @@ export class AuthService {
     });
   }
 
-  readonly hasError$ = this.#hasError$.asObservable();
-  readonly isLoading$ = this.#isLoading$.asObservable();
+  
   isLogin() {
     return this.token !== null;
   }
