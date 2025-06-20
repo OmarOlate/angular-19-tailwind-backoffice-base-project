@@ -1,19 +1,27 @@
-import { NgClass, NgIf } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
+import { Component, inject, ViewChild } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { AlertComponent, ButtonComponent, IconComponent } from 'src/ui';
+import { AlertComponent, ButtonComponent, IconComponent, ToastComponent, ToastService } from 'src/ui';
 import { emailFormatValidator } from '../custom-validators';
 import { AuthService } from '../data-access';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { AccessTokenDto, UserDataDto } from '../dtos';
 import { catchError, of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  imports: [FormsModule, ReactiveFormsModule, RouterLink, AngularSvgIconModule, ButtonComponent, NgClass, IconComponent, AlertComponent],
+  imports: [
+    FormsModule, 
+    ReactiveFormsModule, 
+    RouterLink, 
+    AngularSvgIconModule, 
+    ButtonComponent, 
+    NgClass, 
+    IconComponent, 
+    AlertComponent,
+  ],
 })
 export class SignInComponent {
   readonly #httpService = inject(AuthService);
@@ -21,16 +29,16 @@ export class SignInComponent {
   submitted = false;
   passwordTextType!: boolean;
   errorMessage: string = '';
-
+  readonly $isLoading = this.#httpService.$isLoading;
+  
   constructor(
     private readonly _router: Router,
+    private readonly toast: ToastService,
     ) {}
-
-  protected readonly $hasError = toSignal(this.#httpService.hasError$);
-  protected readonly $isLoading = toSignal(this.#httpService.isLoading$);
 
   private fb = inject(FormBuilder);
 
+  
   loginForm = this.fb.group(
     { 
       email: ['', [Validators.required]],
@@ -52,7 +60,6 @@ export class SignInComponent {
   }
 
   loginUser() {
-    console.log('loginUser llamado');
 
     this.submitted = true;
     const email = this.loginForm.get('email')!.value!;
@@ -76,15 +83,18 @@ export class SignInComponent {
               localStorage.setItem('token', result.token);
               localStorage.setItem('userData', JSON.stringify(result.userData));
               this._router.navigateByUrl('/dashboard/admin');
+              this.toast.show(`Bienvenido ${result.userData.name}!`, 'success');
             }
           }
         ),
         catchError((error) => {
-          console.error(`Ocurrió un error ${error}`);
-          this.errorMessage = 'Error al iniciar sesión';
+          this.errorMessage = `Error al iniciar sesión ${error}`;
+          this.toast.show('Error al iniciar sesión', 'error');
           return of(null);
         })
       )
       .subscribe();
   }
+
+  // protected readonly $hasError = toSignal(this.#httpService.hasError$);
 }
