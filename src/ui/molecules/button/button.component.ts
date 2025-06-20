@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, computed, input } from '@angular/core';
+import { Component, EventEmitter, Output, booleanAttribute, computed, input } from '@angular/core';
 import { cx } from 'src/app/shared/utils/ckassnames';
 import { IconComponent } from 'src/ui/atoms';
 
@@ -18,6 +18,7 @@ type ButtonProps = {
   templateUrl: './button.component.html',
 })
 export class ButtonComponent {
+  $isLoading = input(false, {alias: 'isLoading', transform: booleanAttribute});
   $icon = input<String>(undefined, {alias: 'icon'});
   impact = input<ButtonProps['impact']>('none');
   size = input<ButtonProps['size']>('medium');

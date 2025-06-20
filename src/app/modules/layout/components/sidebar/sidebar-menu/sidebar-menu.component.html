@@ -17,8 +17,7 @@
         class="text-muted-foreground hover:text-foreground group relative flex grow items-center gap-4 rounded-lg px-2">
         <!-- Icon -->
         <div [ngClass]="item.active && !menuService.showSideBar ? 'text-primary' : 'text-muted-foreground/50'">
-          <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
-          <!-- <svg-icon src="{{ item.icon }}" [svgClass]="'h-5 w-5'"> </svg-icon> -->
+          <app-icon>{{ item.icon }}</app-icon>
         </div>
 
         <!-- Condition -->
