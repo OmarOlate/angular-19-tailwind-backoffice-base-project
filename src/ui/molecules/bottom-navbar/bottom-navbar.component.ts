@@ -8,9 +8,9 @@ import { IconComponent } from 'src/ui/atoms';
   templateUrl: './bottom-navbar.component.html',
 })
 export class BottomNavbarComponent {
-  public buttonNavbar: BottomNavbarEnum[]= [];
+  public buttonNavbar: BottomNavbarEnum[] = [];
 
-  constructor(){
+  constructor() {
     this.buttonNavbar = [
       {
         icon: 'home',
@@ -20,12 +20,12 @@ export class BottomNavbarComponent {
       {
         icon: 'person',
         title: 'Perfil',
-        action: 'holitas'
-      }
-    ]
+        action: 'holitas',
+      },
+    ];
   }
 
-  action(action:string){
+  action(action: string) {
     console.log(`Hola ${action}`);
   }
 }

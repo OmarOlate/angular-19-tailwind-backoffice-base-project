@@ -10,9 +10,19 @@ import { SignUpTermsAndConditionsComponent } from 'src/ui/organisms/terms-and-co
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  imports: [FormsModule, NgClass, ReactiveFormsModule, RouterLink, AngularSvgIconModule, ButtonComponent, IconComponent, AlertComponent, SignUpTermsAndConditionsComponent],
+  imports: [
+    FormsModule,
+    NgClass,
+    ReactiveFormsModule,
+    RouterLink,
+    AngularSvgIconModule,
+    ButtonComponent,
+    IconComponent,
+    AlertComponent,
+    SignUpTermsAndConditionsComponent,
+  ],
 })
-export class SignUpComponent{
+export class SignUpComponent {
   hide = true;
   hideConfirm = true;
   passwordStrength = 0;
@@ -20,26 +30,22 @@ export class SignUpComponent{
   private fb = inject(FormBuilder);
 
   form = this.fb.group(
-    { 
+    {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
-      acceptTerms: [false, [Validators.requiredTrue]] 
-    },{
-      validators: [
-        passwordMatchValidator('password', 'confirmPassword'),
-        emailFormatValidator('email'),
-      ]
-    }
-  )
+      acceptTerms: [false, [Validators.requiredTrue]],
+    },
+    {
+      validators: [passwordMatchValidator('password', 'confirmPassword'), emailFormatValidator('email')],
+    },
+  );
 
-
-  submitForm(){
+  submitForm() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    console.log('Formulario válido:', this.form.value);
   }
 
   updatePasswordStrength(event: Event) {
